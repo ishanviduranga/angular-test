@@ -1,0 +1,190 @@
+<div class="container-fluid margin_bottom_20">
+    <!-- header bread crumbs -->
+    <div class="container-fluid margin_bottom_20">
+      <app-bread-crumbs></app-bread-crumbs>  
+    </div>
+      <!-- header bread crumbs -->
+        <!-- Header title  -->
+    <div class="container-fluid margin_bottom_30">
+      
+            <div class="container-fluid fluid-bg-1 ishfaak-align-middle  sticky: true">
+      
+                <div class="container">
+      
+                    <div class="row container_at_1665">
+      
+                        <div class="d-flex flex-row">
+                            <div class="d-inline-block">
+                                <div class="d-inline-block padding_right_30">
+                                    <img src="/assets/images/admin.svg" class="side_nav_icon_extra_big fill_svg_white">
+                                </div>
+                            </div>
+                            <div class="d-inline-block ">
+                                <h1 class="font_white">Report Details</h1>
+                                <p class="font_white">{{today | date: 'dd MMMM yyyy, hh:mm:ss a'}}</p>
+                            </div>
+                        </div>
+      
+                    </div>
+      
+                </div>
+      
+            </div>
+      
+    </div>
+        <!-- Header title  -->
+        <!-- body graph -->
+    <div class="container-fluid i margin_bottom_53">
+      <div class="container"> 
+        <div class="row container_at_1665">
+          <div class="container" style="overflow-x: scroll;">
+
+            <div>
+              <button mat-raised-button>Excel</button>
+              <!--<button mat-raised-button (click)="exporter.exportTable('csv',{fileName:'Company Details'})">CSV</button> -->
+              <button mat-raised-button (click)="downloadPdf()">PDF</button>
+            </div>
+
+            <!-- <button mat-raised-button color="accent" (click)="downloadPdf()">PDF</button><br>  -->
+
+            <div class="row common_border box_shadow padding_15 margin_bottom_10">
+              <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                <label class="col-form-label"><b>Filter your menu</b></label>
+              </div>
+  
+              <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
+                <input type="email" class="form-control" (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+              </div>
+            </div>
+  
+            <div class="row margin_bottom_15"> 
+              <div class="example-container mat-elevation-z8" >
+
+                <mat-table matTableExporter [dataSource]="dataSource" matSort #sort="matSort">
+
+                  <ng-container matColumnDef="company">
+                    <mat-header-cell *matHeaderCellDef  mat-sort-header > Company Name </mat-header-cell>
+                    <mat-cell *matCellDef="let element" >{{element.CompanyName}} </mat-cell>
+                    <mat-footer-cell *matFooterCellDef class="bold mobile-hide"><strong><span class="mobile-value" style="color: yellow;">Unrealized Gain</span></strong></mat-footer-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="holding">
+                    <mat-header-cell *matHeaderCellDef  mat-sort-header > Holding (%) </mat-header-cell>
+                    <mat-cell *matCellDef="let element" > {{element.Holding | number}} </mat-cell>
+                    <mat-footer-cell *matFooterCellDef class="bold mobile-hide"><strong><span class="mobile-value" style="color: yellow;"> /(Loss) Quoted</span></strong></mat-footer-cell>
+                  </ng-container>
+  
+                  <ng-container matColumnDef="noofshares">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> No of Shares </mat-header-cell>
+                    <mat-cell *matCellDef="let element" > {{element.NoOfShares | number}} </mat-cell>                           
+                    <mat-footer-cell *matFooterCellDef class="mobile-hide" ><strong><span class="mobile-value" style="color: yellow;">Shares</span></strong></mat-footer-cell>
+                  </ng-container>
+  
+                  <ng-container matColumnDef="totalCost">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Total Cost </mat-header-cell>
+                    <mat-cell *matCellDef="let element" > {{element.TotalCost | number}} </mat-cell>
+                    <mat-footer-cell *matFooterCellDef class="mobile-hide"><span style="color: yellow;">{{UnrealizedTotalCost | number}}</span></mat-footer-cell>                           
+                  </ng-container>
+  
+                  <ng-container matColumnDef="costperShare">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Cost per Share </mat-header-cell>
+                    <mat-cell *matCellDef="let element" > {{element.CostPerShare | number}} </mat-cell>
+                    <mat-footer-cell *matFooterCellDef class="mobile-hide"></mat-footer-cell>
+                  </ng-container>
+                               
+                  <ng-container matColumnDef="marketpriceStart">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Market Price (Start) </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.MarketPriceStart | number}} </mat-cell>
+                    <mat-footer-cell *matFooterCellDef class="mobile-hide"></mat-footer-cell> 
+                  </ng-container>
+  
+                  <ng-container matColumnDef="marketpriceCurrent">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Market Price (Current) </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.MarketPriceCurrent | number}} </mat-cell> 
+                    <mat-footer-cell *matFooterCellDef class="mobile-hide"></mat-footer-cell>
+                  </ng-container>
+  
+                  <ng-container matColumnDef="marketValue">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Market Value</mat-header-cell>
+                    <mat-cell *matCellDef="let element" > {{ element.MarketValue | number}} </mat-cell>
+                    <mat-footer-cell *matFooterCellDef class="mobile-hide"><span style="color: yellow;">{{UnrealizedTotalMarketValue | number}}</span></mat-footer-cell>
+                  </ng-container>
+  
+                  <ng-container matColumnDef="unrealisedPL">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Unrealised PL</mat-header-cell>
+                    <mat-cell *matCellDef="let element" > {{element.UnrealisedPL | number}}  </mat-cell>
+                    <mat-footer-cell *matFooterCellDef class="mobile-hide"><span style="color: yellow;">{{UnrealizedTotalPL | number}}</span></mat-footer-cell>
+                  </ng-container>
+  
+                  <ng-container matColumnDef="unrealisedOCI">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Unrealised OCI</mat-header-cell>
+                    <mat-cell *matCellDef="let element" > {{element.UnrealisedOCI | number}} </mat-cell>               
+                    <mat-footer-cell *matFooterCellDef><span class="mobile-value bold"> <span style="color: yellow;">{{UnrealizedTotalOCI | number}}</span></span></mat-footer-cell>
+                  </ng-container>
+  
+                  <ng-container matColumnDef="unrealisedTotal">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> All</mat-header-cell>
+                    <mat-cell *matCellDef="let element" > {{element.UnrealisedCurrent | number}} </mat-cell>
+                    <mat-footer-cell *matFooterCellDef class="mobile-hide"><span style="color: yellow;">{{UnrealizedTotalAll | number}}</span></mat-footer-cell>                                
+                  </ng-container>
+
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row"></mat-row>
+
+
+                  <!-- Group header -->
+                  <ng-container matColumnDef="groupHeader">
+                    <mat-cell colspan="999" mat-cell *matCellDef="let groupBy"><strong><span style="color: peru;">{{groupBy.initial}}</span></strong></mat-cell>
+                  </ng-container>
+
+                  <mat-row *matRowDef="let row; columns: ['groupHeader']; when: isGroup"> </mat-row>
+
+                  <!-- Group footer -->
+                  <ng-container matColumnDef="groupFooter">
+                    <mat-cell colspan="999" mat-cell *matCellDef="let groupBy">{{groupBy.initial}}</mat-cell>
+                  </ng-container>
+
+                  <!-- empty footer row-->
+                  <ng-container matColumnDef="emptyFooter">
+                    <mat-footer-cell *matFooterCellDef class="mobile-hide"></mat-footer-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="TotalInvestmentTitle1">
+                    <mat-footer-cell *matFooterCellDef class="bold mobile-hide"><strong><span class="mobile-value" style="color: yellow;">Total</span></strong></mat-footer-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="TotalInvestmentTitle2">
+                    <mat-footer-cell *matFooterCellDef class="bold mobile-hide"><strong><span class="mobile-value" style="color: yellow;">Investment</span></strong></mat-footer-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="TotalInvestment">
+                    <mat-footer-cell *matFooterCellDef class="mobile-hide"><span style="color: yellow;">{{TotalInvestment | number}}</span></mat-footer-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="TotalMarketValue">
+                    <mat-footer-cell *matFooterCellDef class="mobile-hide"><span style="color: yellow;">{{TotalMarketValue | number}}</span></mat-footer-cell>
+                  </ng-container>
+                  
+
+                  <mat-row *matRowDef="let row; columns: ['groupFooter']; when: isGroup"> </mat-row>
+
+                  <mat-footer-row *matFooterRowDef="displayedColumns sticky: true" class="nettoRow"></mat-footer-row>
+
+                  <mat-footer-row *matFooterRowDef="displayedColumnsTotal sticky: true" class="vatRow"></mat-footer-row>
+
+                </mat-table>
+
+                <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
+              </div>
+
+              <!-- Old Table Filter values -->
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- footer graph -->
+    <app-footer class="footer_position"></app-footer>
+  <!-- footer graph -->    
+    <app-right-menu></app-right-menu> 
+  

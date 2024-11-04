@@ -1,0 +1,194 @@
+.width_48 {
+    width: 48%;
+  }
+  
+  .width_3 {
+    width: 3%;
+  }
+  
+  .width_20 {
+      width: 20%;
+  }
+  
+  .width_50_two_columns {
+    width: 50%;
+  }
+  
+  .width_33_three_columns {
+    width: 33%;
+  }
+  
+  .padding_zero_6 {
+    padding: 0px 0px 0px 6px;
+  }
+  
+  .common_border_forms {
+    border-top: 1px solid #d7d7d7 !important;
+    border-left: 1px solid #d7d7d7 !important;
+    border-right: 1px solid #d7d7d7 !important;
+  }
+  
+  .form_label_text_width {
+    width: 98% !important;
+    min-width: 98% !important;
+  }
+  
+  .margin_right_11 {
+    margin-right: 13px;
+  }
+  
+  .form-group {
+    margin-bottom: 10px;
+  }
+  
+  .form-group label {
+    display: block;
+  }
+  
+  .form-group input {
+    text-align: left;
+  }
+  
+  .form-group .value {
+    display: none;
+  }
+  
+  .scroll_y {
+    overflow: hidden;
+    overflow-y: auto;
+  }
+  
+  .drag_container {
+    display: flex;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.4);
+  }
+  
+  .drag_component {
+    flex: 1;
+    height: 475px;
+  }
+  
+  .drag_component:not(:last-child) {
+    margin-right: 8px;
+  }
+  
+  .vamp {
+    cursor: move !important;
+    border-bottom: 1px solid #777;
+    list-style: none;
+    padding: 10px;
+  }
+  
+  .vamp:not(:last-child) {
+    border-bottom: 1px solid #777;
+    margin-bottom: 10px;
+  }
+  
+  .margin_bottom_4 {
+    margin-bottom: 4px;
+  }
+  
+  .padding_row_title {
+    padding: 13px 15px 0px 15px;
+  }
+  
+  .padding_row_radio {
+    padding: 3px 15px 0px 15px;
+  }
+  
+  .margin_bottom_5 {
+    margin-bottom: 5px;
+  }
+  
+  .mat_tree_wrapper {
+    left: -7px;
+    position: relative;
+  }
+  
+  @media screen and (max-width: 905px) {
+    .width_48 {
+      width: 100%;
+    }
+  }
+  
+  .example-tree-invisible {
+    display: none;
+  }
+  
+  .example-tree ul,
+  .example-tree li {
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style-type: none;
+  }
+  .example-tree-node {
+    display: block;
+  }
+  
+  .example-tree-node .example-tree-node {
+    padding-left: 40px;
+  }
+  
+  .inline_block {
+    display: inline-block;
+    /*float: left;*/
+    position: relative;
+  }
+  
+  .align_title {
+    top: 1px;
+    position: relative;
+  }
+  
+  .width_118 {
+    width: 118px;
+  }
+  
+  .no_header_flx {
+    flex: none;
+  }
+  
+  .example-container {
+    display: flex;
+    flex-direction: column;
+    max-height: 500px;
+    min-width: 300px;
+  }
+  
+  .mat-table {
+    overflow: auto;
+    max-height: 500px;
+  }
+  
+  .element-row {
+    position: relative;
+  }
+  
+  .element-row:not(.expanded) {
+    cursor: pointer;
+  }
+  
+  .element-row:not(.expanded):hover {
+    background: #f5f5f5;
+  }
+  
+  .element-row.expanded {
+    border-bottom-color: transparent;
+  }
+  
+  .security-sub-row-parent-div {
+    display: contents;
+    position: relative;
+  }
+  
+  .common_widths {
+    min-width: 94px;
+    height: 21px;
+  }
+  
+  .width_100_for_name {
+    width: 100%;
+    height: 21px;
+  }
+  
